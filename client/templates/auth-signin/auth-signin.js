@@ -1,4 +1,5 @@
-var EDITING_KEY = 'signin'
+var EDITING_KEY = 'signin';
+var ERRORS_KEY = 'loginErrors';
 Session.setDefault(EDITING_KEY, false);
 
 var firstRender = true;
