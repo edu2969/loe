@@ -1,5 +1,6 @@
-@TODO
+# LOE - PartyAcess (de PartySuite)
 
-- No toma correctamente en la creación, el check de es RPAdmin.
-- Los listados debieran tener un mejor material, color negro de fondo es raro.
-- No sale activo la tab inicial en las cuentas
+## Sistema de gestión para público influyente.
+
+Sistema de gestión de listas. Usa lector de código de barras para lectura de RUTs en formato PDF417 y QR.
+Entrega estadísticas post-evento.
