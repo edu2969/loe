@@ -1,0 +1,112 @@
+<template name="clientes">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+
+      <ul id="main-nav-tabs" class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" href="#tab-top-10">
+            <span class="glyphicon glyphicon-heart"></span> TOP 10
+          </a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#tab-baneados">
+            <span class="glyphicon glyphicon-thumbs-down"></span> Baneados
+          </a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#tab-clientes">
+            <span class="glyphicon glyphicon-search"></span> Clientes
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="tab-top-10" class="tab-pane fade in active">
+          <h3><span class="glyphicon glyphicon-heart"></span> Top 10</h3>
+          <h6>Por asistencias</h6>
+          <table class="tabla-ms">
+            <tr>
+              <th>N</th>
+              <th>Nombre</th>
+              <th>Inscrito</th>
+              <th>Asistencias</th>
+            </tr>
+            {{#each top10}}
+            <tr>
+              <td>{{indice}}</td>
+              <td>{{names}}</td>
+              <td>{{inscripciones}}</td>
+              <td>{{asistencias}}</td>
+            </tr>
+            {{/each}}
+          </table>
+        </div>
+
+        <div id="tab-baneados" class="tab-pane fade">
+          <h3><span class="glyphicon glyphicon-thumbs-down"></span> Baneados</h3>
+          <h6>Los innombrables</h6>
+          <table class="tabla-ms">
+            <tr>
+              <th>N</th>
+              <th>Rut</th>
+              <th>Nombre</th>              
+              <th>Razon</th>
+            </tr>
+            {{#each baneados}}
+            <tr>
+              <td>{{indice}}</td>
+              <td>{{rut}}</td>
+              <td>{{names}}</td>
+              <td>{{observacion}}</td>
+            </tr>
+            {{else}}
+            <tr>
+              <td colspan="3">
+                <h4>No hay baneados aún</h4></td>
+            </tr>
+            {{/each}}
+          </table>
+        </div>
+
+        <div id="tab-clientes" class="tab-pane fade">
+          <div class="row">
+            <div class="col-xs-12">
+              <h1><span class="glyphicon glyphicon-list-alt"></span> Listado de Eventos</h1>
+              <span tipo="etiqueta">Busque por nombre o RUT</span>
+            </div>
+            <div class="col-xs-12">
+              <div class="left-inner-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input id="lupa" placeholder="Texto" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div id="search-meta" style="margin-top: 16px">
+            {{#if isLoading}} searching ... {{/if}}
+          </div>
+          {{#each clientes}}
+          <div class="element-list-container">
+            <div class="col-xs-12">
+              <h4>{{{names}}} <small>Asiste {{asistencias}} de {{inscripciones}}</small></h4>
+              <span tipo="etiqueta">Rut: {{{rut}}}</span>
+            </div>
+            <div class="col-xs-12" style="text-align: right; margin-top: 7px;">
+              <button type="button" id="{{_id}}" class="btn btn-primary btn-ver">
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver
+              </button>
+            </div>
+          </div>
+          {{else}}
+          <div class="element-list-container">
+            <div class="col-lg-12">
+              <h4>No hay concidencias</h4>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>

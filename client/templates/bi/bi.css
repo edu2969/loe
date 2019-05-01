@@ -1,0 +1,10 @@
+svg { display: block; }
+.chart-wrapper { border: 2px solid #BDC3C7; border-radius: 8px; margin-top: 10px; text-align: center; }
+.chart-wrapper svg { height: 300px; width: 338px; }
+
+.rps-select { background-color: #31b0d5; border-color: #269abc; color: white; }
+
+#torta-efectividad {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+}

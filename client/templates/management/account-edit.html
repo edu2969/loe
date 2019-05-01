@@ -1,0 +1,81 @@
+<template name="accountEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable">
+      <div class="col-md-12 col-lg-12">
+        <h3>{{#if accountSelected}}Edición {{else}}Nuevo {{/if}} {{roleName}}</h3>
+      </div>
+
+      {{#if messages}}
+      <div class="list-errors" style="padding-top: 20px;">
+        {{#if messages.danger}}
+        <div class="alert alert-danger" role="alert">
+          {{#each messages.danger}}
+          <span class="glyphicon glyphicon-remove"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}} {{#if messages.warning}}
+        <div class="alert alert-warning" role="alert">
+          {{#each messages.warning}}
+          <span class="glyphicon glyphicon-warning-sign"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}} {{#if messages.success}}
+        <div class="alert alert-success" role="alert">
+          {{#each messages.success}}
+          <span class="glyphicon glyphicon-ok"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}}
+      </div>
+      {{/if}}
+
+      <div class="col-md-6 col-lg-6" style="margin-top: 8px">        
+        <span tipo="etiqueta">Nombre</span>
+        <div class="form-input">
+          <input id="account-name" class="form-control" placeholder="Nombres" 
+                 value="{{accountSelected.profile.name}}">
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6" style="margin-top: 8px">
+        <span tipo="etiqueta">Username</span>
+        <div class="form-input">
+          <input class="form-control" placeholder="Username" id="account-username" value="{{accountSelected.username}}" />
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-12" style="margin-top: 8px">
+        <span tipo="etiqueta">e-mail</span>
+        <div class="form-input">
+          <input class="form-control" name="email" placeholder="Your Email" id="account-email" value="{{accountSelected.emails.[0].address}}" />
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6" style="margin-top: 8px">
+        <span tipo="etiqueta">Password</span>
+        <div class="form-input">
+          <input type="secret" class="form-control" placeholder="Digite para cambiar" id="account-password" />
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6" style="margin-top: 8px">
+        <span tipo="etiqueta">Re-Password</span>
+        <div class="form-input">
+          <input type="secret" class="form-control" placeholder="Deben coincidir" id="account-repassword" />
+        </div>
+      </div>
+      {{#if isRP}}
+      <div class="col-md-6 col-lg-6" style="margin-top: 8px">
+        <div class="input-group">
+          <input id="checkbox-rp-admin" type="checkbox" checked="{{ accountSelected.profile.isRPAdmin }}">
+          <span tipo="etiqueta">Es RP-Admin </span>
+        </div>
+        <div class="input-group">
+          <input id="checkbox-privilegiado" type="checkbox" checked="{{ accountSelected.profile.privilegiado }}">
+          <span tipo="etiqueta">Tiene privilegios </span>
+        </div>
+      </div>
+      {{/if}}
+      <div class="col-xs-12" style="float: right; padding-top: 20px;">
+        <a href="#" class="btn btn-danger btn-block" id="btn-save">Guardar</a>
+      </div>
+    </div>
+  </div>
+</template>

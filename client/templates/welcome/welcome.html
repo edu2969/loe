@@ -1,0 +1,66 @@
+<template name="welcome">
+  <div class="welcome-container">
+    <div class="col-md-12 col-lg-12">
+      <h2><img src="/img/loe-logo.jpg" width="181" style="border-radius: 50%;"/> Bienvenid@</h2>
+    </div>
+    <div class="col-md-12 col-lg-12" style="margin-top: 8px">
+      <h4>{{#if actualEvent}}{{actualEvent.name}}{{else}}NO HAY EVENTO HOY{{/if}}</h4>
+      <h6 id="time">Hora Actual: 00:00</h6>
+      <h5>{{actualEvent.arrives}} de {{actualEvent.total}}</h5>
+      <div style="display:{{#if noGender}}none{{else}}{{/if}}">
+        <div class="col-md-12 col-lg-12" style="padding-bottom: 10px;">
+          <div style="padding: 10px; height : 87px;">
+            <a id="btn-female" class="col-xs-5 btn btn-default">
+              <img src="/img/gender-female.png" height="70" />
+            </a>
+            <div class="col-xs-2"></div>
+            <a id="btn-male" class="col-xs-5 btn btn-default">
+              <img src="/img/gender-male.png" height="70" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div style="width: 390px; display:{{#if noGender}}{{#if actualEvent}}inline-block{{else}}none{{/if}}{{else}}none{{/if}};">
+        <div style="display: inline-block">
+          <div id="div-rut" class="input-group" style="width: 270px">
+            <span class="input-group-addon">RUT</span>
+            <input id="guest-rut" type="text" class="form-control" disabled="{{#if actualEvent.cerrado}}true{{/if}}"/>
+          </div>
+        </div>
+        <div class="boton-ban" style="display: inline-block; vertical-align: top">
+          <a id="btn-ban" class="btn btn-default">
+            <img src="/img/cara-feliz.png" height="66" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{#if messages}}
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="list-errors" style="padding-top: 20px;">
+        {{#if messages.danger}}
+        <div class="alert alert-danger" role="alert">
+          {{#each messages.danger}}
+          <span class="glyphicon glyphicon-remove"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}} {{#if messages.warning}}
+        <div class="alert alert-warning" role="alert">
+          {{#each messages.warning}}
+          <span class="glyphicon glyphicon-warning-sign"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}} {{#if messages.success}}
+        <div class="alert alert-success" role="alert">
+          {{#each messages.success}}
+          <span class="glyphicon glyphicon-ok"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</template>

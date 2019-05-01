@@ -1,0 +1,49 @@
+<template name="bi">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h3><span class="glyphicon glyphicon-star"></span> Efectividad</h3>
+          <h6>Distribución de Efectividad de RPs por rango de fechas</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5">
+          <span tipo="etiqueta">Desde</span>
+        </div>
+        <div class="col-xs-7">
+          <span tipo="etiqueta">Hasta</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5">
+          <div class="input-group date datetimepicker-component">
+            <input class="form-control" id="input-desde" tipo="fecha" {{disabled}}/>
+            <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-5">
+          <div class="input-group date datetimepicker-component">
+            <input class="form-control" id="input-hasta" tipo="fecha" {{disabled}}/>
+            <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <button class="btn btn-primary" id="btn-refrescar"><span class="glyphicon glyphicon-refresh"></span></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="torta-efectividad"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>

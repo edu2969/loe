@@ -1,0 +1,70 @@
+<template name="guestEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable">
+      <div class="col-md-12 col-lg-12">
+        <h3><span class="glyphicon glyphicon-eye-open"></span> Info Básica</h3>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <span tipo="etiqueta">Nombres</span>
+          <div class="form-input">
+            <input id="guest-names" class="form-control" placeholder="Nombres" 
+                   value="{{guest.names}}"
+                   {{noRPAdmin}}>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-6">
+          <span tipo="etiqueta">Rut</span>
+          <div class="form-input">
+            <input id="guest-names" class="form-control" placeholder="Rut" value="{{guest.rut}}" {{noRPAdmin}}>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="checkbox-baneado" style="word-wrap:break-word">
+            <input id="checkbox-baneado" type="checkbox" checked="{{guest.baneado}}" 
+                   {{noRPAdmin}}/>
+            <span tipo="etiqueta"> Baneado?</span>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-input">
+            <span tipo="etiqueta">Genero: </span>
+            <div class="btn-group btn-group-xs" role="group">
+              <button id="gender-female" type="button" class="btn btn-info{{#if isFemale}} active{{/if}}" {{noRPAdmin}}>Fem</button>
+              <button id="gender-noinfo" type="button" class="btn btn-info{{#if noGender}} active{{/if}}" {{noRPAdmin}}>S/I</button>
+              <button id="gender-male" type="button" class="btn btn-info{{#if isMale}} active{{/if}}" {{noRPAdmin}}>Mas</button>
+              <input id="hidden-gender" value="{{guest.gender}}" style="display:none" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <span tipo="etiqueta">Observacion</span>
+          <div class="form-input">
+            <textarea rows="4" class="form-control" id="textarea-observacion" {{noRPAdmin}}>{{guest.observacion}}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <button class="btn btn-primary btn-block" id="btn-volver">
+            <span class="glyphicon glyphicon-chevron-left"></span> Volver
+          </button>
+        </div>
+        <div class="col-xs-8">
+          <button class="btn btn-danger btn-block" id="btn-guardar" {{noRPAdmin}}>
+            <span class="glyphicon glyphicon-save"></span> Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

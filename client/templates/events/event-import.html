@@ -1,0 +1,48 @@
+<template name="eventImport">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable">
+      <div class="col-md-6 col-lg-6">
+        <h3><span class="glyphicon glyphicon-import"></span> {{evento.name}}</h3>
+        <h4>Importación de Invitados</h4>
+        <span tipo="etiqueta">
+          <span class="glyphicon glyphicon-exclamation-sign"></span> Formato: [Nombre(s) Apellido(s) Rut]
+        </span>
+      </div>
+      <div class="col-md-12 col-lg-12" style="margin-top: 8px">
+        <div class="form-input">
+          <textarea id="ruts-2-import" class="form-control" cols="0" rows="5" style=" width : 100%;resize: none;"></textarea>
+        </div>
+      </div>
+      {{#if messages}}
+      <div style="clear:both"></div>
+      <div class="list-errors" style="padding-top: 20px;">
+        {{#if messages.danger}}
+        <div class="alert alert-danger" role="alert">
+          {{#each messages.danger}}
+          <span class="glyphicon glyphicon-remove"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}} {{#if messages.warning}}
+        <div class="alert alert-warning" role="alert">
+          {{#each messages.warning}}
+          <span class="glyphicon glyphicon-warning-sign"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}} {{#if messages.success}}
+        <div class="alert alert-success" role="alert">
+          {{#each messages.success}}
+          <span class="glyphicon glyphicon-ok"></span> {{item}}
+          <br/> {{/each}}
+        </div>
+        {{/if}}
+      </div>
+      {{/if}}
+      <div class="col-xs-12" style="padding-top: 20px;">
+        <buttom href="#" class="btn btn-danger btn-block" id="btn-import">
+          <span class="glyphicon glyphicon-import"></span> Importar
+        </buttom>
+      </div>
+    </div>
+  </div>
+</template>

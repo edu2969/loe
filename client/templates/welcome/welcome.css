@@ -1,0 +1,26 @@
+.welcome-container {
+  border: 2px solid #ecf0f1;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 10px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.welcome-container::after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+
+#guest-rut {
+  font-size: 40px;
+  height: 78px;
+  padding: 0;
+}
+
+.alert {
+  font-size: 26px;
+  font-weight: bolder;
+}

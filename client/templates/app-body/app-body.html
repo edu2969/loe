@@ -1,0 +1,49 @@
+<template name="appBody">
+  <div id="container" class="{{menuOpen}} {{cordova}}">
+    {{>modalConfirmacion}}
+    <section id="menu">
+      {{#if currentUser}}
+      <div class="btns-group-vertical">
+        <a href="#" class="js-user-menu btn-secondary">
+                        {{#if userMenuOpen}}
+                            <span class="icon-arrow-up"></span>
+                        {{else}}
+                            <span class="icon-arrow-down"></span>
+                        {{/if}}
+                        {{emailLocalPart}}
+                    </a> {{#if userMenuOpen}}
+        <a class="js-logout btn-secondary">
+          <span class="glyphicon glyphicon-off"></span> Logout
+        </a>
+        {{/if}}
+      </div>
+      {{>navigation}} {{else}}
+      <div class="btns-group">
+        <a href="{{pathFor 'signin'}}" class="btn-secondary">
+          <span class="glyphicon glyphicon-home"></span> Ingresar
+        </a>
+      </div>
+      {{/if}}
+
+    </section>
+
+    {{#unless connected}}
+    <div class="notifications">
+      <div class="notification">
+        <span class="icon-sync"></span>
+
+        <div class="meta">
+          <div class="title-notification">Trying to connect</div>
+          <div class="description">There seems to be a connection issue</div>
+        </div>
+      </div>
+    </div>
+    {{/unless}}
+
+    <div class="content-overlay"></div>
+
+    <div id="content-container">
+      {{> yield}}
+    </div>
+  </div>
+</template>

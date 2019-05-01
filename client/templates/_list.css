@@ -1,0 +1,71 @@
+.tabla-ms {
+  width: 100%;
+}
+
+.tabla-ms td, .tabla-ms th {
+  background-color: #428e92;
+  border: 1px solid white;
+  border-top: 0px;
+  padding: 4px;
+  color: white;
+}
+
+.page.lists-show .content-scrollable {
+  top: 3em !important;
+}
+.filter-container {
+  width: 100%;
+  height: auto;
+}
+.element-list-container {
+  padding: 7px;
+  margin-bottom: 5px;
+  background-color: rgba(255, 255, 255, 0.01);
+  height: auto;
+  overflow: auto;
+  color: white;
+  border: 2px solid rgba(189, 195, 199,1.0);
+  border-radius: 5px;
+  margin-top: 7px;
+}
+.element-list-container h2 {
+  margin-top: 4px;
+}
+
+.list-header {
+  text-align: center;
+  background: red;
+  width: 100%;
+  clear: both;
+  padding: 25px 0 7px 0; 
+}
+
+.left-inner-addon {
+    position: relative;
+}
+.left-inner-addon input {
+    padding-left: 25px;    
+}
+.left-inner-addon i {
+    position: absolute;
+    padding: 7px 7px;
+    pointer-events: none;
+}
+
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 25px;    
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 7px 7px;
+    pointer-events: none;
+}
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}

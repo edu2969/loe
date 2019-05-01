@@ -1,0 +1,33 @@
+<template name="topNav">
+  <nav class="js-title-nav">
+    <div class="nav-group">
+      <a href="#" class="js-menu nav-item"><span class="glyphicon glyphicon-align-justify"></span></a>
+    </div>
+    <div class="icon-nav-top" style="float: right; font-size: 24px; margin-right: 8px">
+      {{#if isAdmin}}
+      <a href="{{pathFor 'maintenance'}}" style="margin-right: 16px">
+        <span class="glyphicon glyphicon-wrench"></span>
+      </a>
+      {{/if}}
+
+      <a href="{{pathFor 'eventsList'}}" style="margin-right: 16px">
+        <span class="glyphicon glyphicon-list-alt"></span>
+      </a>
+      
+      {{#if isRPAdmin}}
+      <a id="btn-nav-add-event" style="margin-right: 16px">
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+      <a href="{{pathFor 'manager'}}" style="margin-right: 16px">
+        <span class="glyphicon glyphicon-cog"></span>
+      </a>
+      <a href="{{pathFor 'clientes'}}" style="margin-right: 16px">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+      <a href="#" style="margin-right: 16px" id="go-bi">
+        <span class="glyphicon glyphicon-stats"></span>
+      </a>
+      {{/if}}       
+    </div>
+  </nav>
+</template>

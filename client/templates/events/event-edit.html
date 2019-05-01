@@ -1,0 +1,101 @@
+<template name="eventEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable">
+      <div class="row">
+        <div class="col-md-6 col-lg-6">
+          <h3>{{#if eventSelected._newMark}}Nuevo Evento{{else}}Editando Evento{{/if}}</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Datos básicos</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <span tipo="etiqueta">Nombre</span>
+          <div class="form-group">
+            <input class="form-control" placeholder="Evento" id="event-name" value="{{eventSelected.name}}" {{disabled}}/>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <span>&nbsp;</span>
+          <button href="#" class="btn btn-danger btn-block" id="btn-guardar" {{disabled}}>
+            <span class="glyphicon glyphicon-save"></span> Guardar
+          </button>
+        </div>
+        <div class="col-xs-6">
+          <span tipo="etiqueta">Fecha</span>
+          <div class="input-group date datetimepicker-component">
+            <input class="form-control" id="input-evento-fecha" value="{{formatDate eventSelected.date 'DD/MM/YY'}}" tipo="fecha" {{disabled}}/>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="form-group">
+            <span tipo="etiqueta">Cierre de lista</span>
+            <div class="input-group date datetimepicker-component">
+              <input class="form-control" id="event-close-time" value="{{formatoHoraNocturno eventSelected.closeTime}}" tipo="hora" {{disabled}}/>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Distribucion de captaciones</h4>
+        </div>
+      </div>
+
+      <ul id="main-nav-tabs" class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" href="#tab-torta">
+            <span class="glyphicon glyphicon-sunglasses"></span> Torta
+          </a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#tab-tabla">
+            <span class="glyphicon glyphicon-th-list"></span> Tabla
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="tab-tabla" class="tab-pane fade">
+          <table class="tabla-ms">
+            <tr>
+              <th>RP</th>
+              <th>Lista</th>
+              <th>% Efec</th>
+              <th>% Asis</th>
+            </tr>
+            {{#each rps}} 
+            <tr>
+              <td>{{indice}}. {{nombre}}</td>
+              <td>{{asisten}} de {{inscritos}}</td>
+              <td>{{porcentajeEfectividad}}</td>
+              <td>{{porcentajeAsistencia}}</td>
+            </tr>
+            {{/each}}
+          </table>
+        </div>
+
+        <div id="tab-torta" class="tab-pane fade in active">
+          <div class="row">
+            <div class="col-xs-12">
+              <div id="torta-efectividad"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>

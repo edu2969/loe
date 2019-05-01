@@ -1,0 +1,82 @@
+* {
+  .box-sizing(border-box);
+  -webkit-tap-highlight-color:#000;
+  -webkit-tap-highlight-color: transparent; // for some Androids
+}
+
+html, button, input, textarea, select {
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  .type-regular;
+  line-height: 1.4;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 500px){
+  html{
+    font-size: 15px;
+  }
+}
+@media screen and (min-width: 570px){
+  html{
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 620px){
+  html{
+    font-size: 17px;
+  }
+}
+@media screen and (min-width: 680px){
+  html{
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 720px){
+  html{
+    font-size: 19px;
+  }
+}
+@media screen and (min-width: 800px){
+  html{
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 860px){
+  html{
+    font-size: 21px;
+  }
+}
+@media screen and (min-width: 920px){
+  html{
+    font-size: 22px;
+  }
+}
+@media screen and (min-width: 1000px){
+  html{
+    font-size: 23px;
+  }
+}
+section{
+    background: #212121;
+}
+section:nth-child(even){
+    background: transparent;
+}
+p{
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+a.button{
+  display: inline-block;
+  line-height: 2.5rem;
+  padding: 0 1.5rem;
+  margin-top: 1rem;
+  color: white;
+  background: rgb(127, 140, 141);
+  text-decoration: none;
+}

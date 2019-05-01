@@ -1,0 +1,55 @@
+// Caps styling used in headers
+.title-caps() {
+  letter-spacing: .3em;
+  text-indent: .3em;
+}
+
+// Adds an ellipses at the end of overflowing strings
+.ellipsized() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.force-wrap {
+  word-wrap: break-word;
+  word-break: break-all;
+ -ms-word-break: break-all;
+  word-break: break-word; // Non-standard for webkit
+  .hyphens(auto);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: white;
+}
+
+span[tipo='etiqueta'] {
+  color: white;
+}
+
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small,
+.h1 small,
+.h2 small,
+.h3 small,
+.h4 small,
+.h5 small,
+.h6 small,
+h1 .small,
+h2 .small,
+h3 .small,
+h4 .small,
+h5 .small,
+h6 .small,
+.h1 .small,
+.h2 .small,
+.h3 .small,
+.h4 .small,
+.h5 .small,
+.h6 .small {
+  color: white;
+}
