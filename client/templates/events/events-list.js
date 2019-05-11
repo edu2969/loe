@@ -15,7 +15,13 @@ Template.eventsList.rendered = function () {
 
 Template.eventsList.helpers({
   eventos: function () {
-    return Events.find({ }, { sort: {date: -1}});
+    return Events.find({ }, { sort: {date: -1}}).map(function(c) {
+        var yo = Meteor.user();
+        c.puedever = yo.profile.privilegiado 
+        || yo.profile.esRPAdmin 
+        || yo.profile.role==1;
+        return c;
+    });
   },
   isRPAdmin: function () {
     return Meteor.user().profile.isRPAdmin || Meteor.user().profile.role == 1
