@@ -18,7 +18,7 @@ Template.eventsList.helpers({
     return Events.find({ }, { sort: {date: -1}}).map(function(c) {
         var yo = Meteor.user();
         c.puedever = yo.profile.privilegiado 
-        || yo.profile.esRPAdmin 
+        || yo.profile.isRPAdmin 
         || yo.profile.role==1;
         return c;
     });
