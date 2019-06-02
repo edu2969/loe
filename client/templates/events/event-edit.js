@@ -86,7 +86,7 @@ Template.eventEdit.helpers({
 });
 
 TablaRPs = function () {
-  return BIRPs.find({}, { asisten: { $gt: 0 }}).map(function (reg, indice) {
+  return BIRPs.find({ asisten: { $gt: 0 }}).map(function (reg, indice) {
     var evento = Session.get('EventoSeleccionado');
     reg.nombre = Meteor.users.findOne({
       _id: reg.rpId
