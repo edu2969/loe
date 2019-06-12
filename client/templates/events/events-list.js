@@ -51,7 +51,7 @@ Template.eventsList.events({
     Meteor.call("LogHT", "LISTADO_CLIENTES", true);
     var eventId = e.currentTarget.id.substring(9)
     Session.set('EventoSeleccionado', Events.findOne(eventId))
-    Router.go('/attendersList/' + eventId)
+    Router.go('/attendersList/' + eventId + "/0");
   },
   'click .btn-eliminar': function (e) {
     var id = e.currentTarget.id;
