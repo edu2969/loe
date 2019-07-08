@@ -184,24 +184,29 @@ Meteor.publish('birps', function (desde, hasta) {
     });
 });
 
-Meteor.publish('birpevento', function (eventoId) {
-    // Busca eventos entre las fechas
-    var rpIds = [];
-    var rps = Meteor.users.find({
-        "profile.role": {
-            $in: [1, 2, 3]
-        }
-    });
-    rps.forEach(function (rp) {
-        rpIds.push(rp._id);
-    });
-    // Hace arreglo de llaves con 
-    return BIRPs.find({
-        eventoId: eventoId,
-        rpId: {
-            $in: rpIds
-        }
-    });
+Meteor.publishComposite('birpevento', function (eventoId) {
+    return {
+        find: function() {
+            return BIRPs.find({
+                eventoId: eventoId
+            });
+        },
+        children: [{
+            find: (function(reg) {
+                return Meteor.users.find({ _id: reg.rpId }, {
+                    fields: {
+                        services: false,
+                        createdAt: false,
+                        emails: false,
+                        username: false,
+                        "profile.role": false,
+                        "profile.isRPAdmin": false,
+                        "profile.rut": false
+                    }
+                })
+            })
+        }]
+    }
 });
 
 Meteor.publish('biactual', function () {
