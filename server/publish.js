@@ -15,7 +15,7 @@ Meteor.publish('eventos.porIds', function (ids) {
 
 Meteor.publish('eventos', function () {
     return Events.find({}, {
-        limit: 10,
+        limit: 6,
         sort: {
             date: -1
         }
