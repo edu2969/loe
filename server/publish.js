@@ -15,7 +15,7 @@ Meteor.publish('eventos.porIds', function (ids) {
 
 Meteor.publish('eventos', function () {
     return Events.find({}, {
-        limit: 6,
+        limit: ( Meteor.user().profile.isRPAdmin ? 10 : 6 ),
         sort: {
             date: -1
         }
