@@ -22,7 +22,8 @@ Meteor.publish('eventos', function () {
     });
 });
 
-Meteor.publishComposite('asistentes', function (eventoId) {
+Meteor.publishComposite('asistentes', function (eventoId, pagina) {
+    let saltos = 10;
     return {
         find: function () {
             return Events.find({
