@@ -27,7 +27,10 @@ Template.eventImport.helpers({
 
 Template.eventImport.events({
    'click #btn-import': function () {
-      if (!Meteor.user()) Router.go("/");
+      if (!Meteor.user()) {
+         Router.go("/");
+         return;
+      }
       var messages;
 
       var eventSelected = Session.get('EventoSeleccionado');
