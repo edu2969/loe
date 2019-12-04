@@ -30,10 +30,10 @@ Template.eventEdit.events({
         var name = $('#event-name').val();
         var fecha = moment($('#input-evento-fecha').val(), 'DD/MM/YY').toDate()
 
-        var parts = $('#event-close-time').val().split(":")
+        /*var parts = $('#event-close-time').val().split(":")
         var hours = Number(parts[0])
         hours = hours + 12 * (hours < 12 ? 1 : -1)
-        var closeTime = hours * 60 * 60 * 1000 + Number(parts[1]) * 60 * 1000
+        var closeTime = hours * 60 * 60 * 1000 + Number(parts[1]) * 60 * 1000*/
 
         var eventSelected = Session.get('EventoSeleccionado');
 
@@ -43,7 +43,6 @@ Template.eventEdit.events({
                 userId: Meteor.userId(),
                 name: name,
                 date: fecha,
-                closeTime: closeTime,
                 total: 0,
                 arrives: 0,
                 averageCheckTime: 0
@@ -52,8 +51,7 @@ Template.eventEdit.events({
             Events.update(eventSelected._id, {
                 $set: {
                     'name': name,
-                    'date': fecha,
-                    'closeTime': closeTime
+                    'date': fecha
                 }
             });
         }
