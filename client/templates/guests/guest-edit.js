@@ -53,7 +53,7 @@ Template.guestEdit.events({
       }
     });
     var evt = Session.get('EventoSeleccionado');
-    Router.go('/attendersList/' + ( evt ? evt._id : '-1' ));
+    history.go(-1);
   },
   'click #gender-male': function () {
     $('#hidden-gender').val('M');
