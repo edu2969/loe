@@ -1,3 +1,44 @@
+function CheckRut(rutSinGuion) {
+  if (rutSinGuion.toString().trim() != '') {
+    var caracteres = new Array();
+    var serie = new Array(2, 3, 4, 5, 6, 7);
+    var dig = rutSinGuion.toString().substr(rutSinGuion.toString().length - 1, 1);
+    rutSinGuion = rutSinGuion.toString().substr(0, rutSinGuion.toString().length - 1);
+
+    for (var i = 0; i < rutSinGuion.length; i++) {
+      caracteres[i] = parseInt(rutSinGuion.charAt((rutSinGuion.length - (i + 1))));
+    }
+
+    var sumatoria = 0;
+    var k = 0;
+    var resto = 0;
+
+    for (var j = 0; j < caracteres.length; j++) {
+      if (k == 6) {
+        k = 0;
+      }
+      sumatoria += parseInt(caracteres[j]) * parseInt(serie[k]);
+      k++;
+    }
+
+    resto = sumatoria % 11;
+    dv = 11 - resto;
+
+    if (dv == 10) {
+      dv = "K";
+    } else if (dv == 11) {
+      dv = 0;
+    }
+
+    if (dv.toString().trim().toUpperCase() == dig.toString().trim().toUpperCase())
+      return true;
+    else
+      return false;
+  } else {
+    return false;
+  }
+}
+
 Meteor.methods({
   LogHT(accion, trackip) {
     var doc = {
@@ -509,7 +550,6 @@ Meteor.methods({
     return messages;
   },
   ObtenerVistaBI(desde, hasta) {
-    console.log("-------->", desde, hasta);
     var fechas = [];
     var rps = [];
     Events.find({
@@ -518,7 +558,6 @@ Meteor.methods({
         $lt: hasta
       }
     }).forEach(function (e, indice) {
-      console.log("FECHA >> ", moment(e.date).format('DD/MM/YY'));
       fechas.push({
         indice: indice,
         eventoId: e._id,
@@ -557,7 +596,6 @@ Meteor.methods({
             indice = rp.indice;
           }
           
-          console.log("Procesando >> ", rp, " { indice: " + indice + "}");
           
           rp.stats[fecha.indice].resumen = reg.asisten + " / " + reg.inscritos;
           rp.stats[fecha.indice].pe = reg.asisten 
@@ -570,7 +608,6 @@ Meteor.methods({
           rps[indice] = rp;            
         });
     });
-    //console.log("RPS >>", rps);
     return {
       rps: rps.map(function(rp) {
         delete rp.indice;
@@ -627,43 +664,3 @@ Meteor.methods({
   }
 });
 
-function CheckRut(rutSinGuion) {
-  if (rutSinGuion.toString().trim() != '') {
-    var caracteres = new Array();
-    var serie = new Array(2, 3, 4, 5, 6, 7);
-    var dig = rutSinGuion.toString().substr(rutSinGuion.toString().length - 1, 1);
-    rutSinGuion = rutSinGuion.toString().substr(0, rutSinGuion.toString().length - 1);
-
-    for (var i = 0; i < rutSinGuion.length; i++) {
-      caracteres[i] = parseInt(rutSinGuion.charAt((rutSinGuion.length - (i + 1))));
-    }
-
-    var sumatoria = 0;
-    var k = 0;
-    var resto = 0;
-
-    for (var j = 0; j < caracteres.length; j++) {
-      if (k == 6) {
-        k = 0;
-      }
-      sumatoria += parseInt(caracteres[j]) * parseInt(serie[k]);
-      k++;
-    }
-
-    resto = sumatoria % 11;
-    dv = 11 - resto;
-
-    if (dv == 10) {
-      dv = "K";
-    } else if (dv == 11) {
-      dv = 0;
-    }
-
-    if (dv.toString().trim().toUpperCase() == dig.toString().trim().toUpperCase())
-      return true;
-    else
-      return false;
-  } else {
-    return false;
-  }
-}
