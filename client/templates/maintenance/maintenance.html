@@ -1,16 +1,29 @@
 <template name="maintenance">
-    <div class="page lists-show">
-        {{>topNav}}
-        <div class="content-scrollable">
-            <div class="col-xs-12" style="margin-bottom: 4px;">
-                <button id="btn-generar-bi" class="btn btn-primary">Generar BI</button>
-            </div>
-            <div class="col-xs-12" style="margin-bottom: 4px;">
-                <button id="btn-2" class="btn btn-warning">Reiniciar Evento</button>
-            </div>
-            <div class="col-xs-12" style="margin-bottom: 4px;">
-                <button id="btn-go-inspect" class="btn btn-info">Go Inspect!</button>
-            </div>
-        </div>
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable">
+      <section name="reportelogs">
+        <table>
+          <tbody>
+            <td>RP</td>
+            <td>Acción</td>
+            <td>Fecha</td>
+            <td>IP</td>            
+          </tbody>
+          {{#each logs}}
+          <tr style="color: {{color}}">
+            <td>{{rp}}</td>
+            <td>{{accion}}</td>
+            <td>{{fecha}}</td>
+            <td>{{ip}}</td>            
+          </tr>
+          {{else}}
+          <tr>
+            <td>Sin historia</td>
+          </tr>
+          {{/each}}
+        </table>
+      </section>
     </div>
+  </div>
 </template>

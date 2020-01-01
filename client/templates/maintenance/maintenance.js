@@ -3,29 +3,22 @@
 // 1. Por evento deben ser contabilizados los asistentes, presentes, mujeres, hombres y actualizar los eventos.
 // 2. Para aquellos que contengan información de hora de arrivo, se actualiza campo averageArriveTime del evento
 
-Template.maintenance.events({
-  'click #btn-generar-bi': function () {
-    $('#btn-generar-bi').text('Working on it...');
-    $('#btn-generar-bi').attr('readonly', false);
+Template.maintenance.rendered = function() {
+  Meteor.call("GetLogs", 0, function(err, resp) {
+    if(!err) {
+      Session.set("Logs", resp);
+    }
+  })
+}
 
-    Meteor.call('generarBI');
-    
-    $('#btn-generar-bi').text('Everything Ok!');
-  },
-  'click #btn-2': function () {
-    $('#btn-2').text('Reiniciando evento...');
-    $('#btn-2').attr('readonly', false);
-    
-    Meteor.call('reiniciarEventos');
-    
-    $('#btn-2').text('Done!');
-  },
-  'click #btn-go-inspect': function () {
-    $('#btn-go-inspect').text('Inspecting...');
-    $('#btn-go-inspect').attr('readonly', false);
-
-    $('#btn-go-inspect').text('Check Console');
+Template.maintenance.helpers({
+  logs() {
+    return Session.get("Logs");
   }
+})
+
+Template.maintenance.events({
+
 });
 
 function timeFormat(ms) {

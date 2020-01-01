@@ -7,9 +7,7 @@ Template.topNav.events({
   'click #go-bi': function (e) {
     Meteor.call("LogHT", "BI", true);
     e.preventDefault();
-    var desde = moment().subtract(1, 'month').format('DD-MM-YYYY');
-    var hasta = moment().format('DD-MM-YYYY');
-    Router.go('/bi/' + desde + '/' + hasta);
+    Router.go('/bi');
   }
 });
 

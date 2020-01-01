@@ -5,8 +5,8 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <h3><span class="glyphicon glyphicon-star"></span> Efectividad</h3>
-          <h6>Distribución de Efectividad de RPs por rango de fechas</h6>
+          <h3><span class="glyphicon glyphicon-star"></span> Vista BI <small>Inteligencia de negocios</small></h3>
+          <h6>Resumen de RPs por rango de fechas</h6>
         </div>
       </div>
       <div class="row">
@@ -17,20 +17,20 @@
           <span tipo="etiqueta">Hasta</span>
         </div>
       </div>
-      <div class="row">
+      <div class="row" style="margin-bottom: 1em;">
         <div class="col-xs-5">
           <div class="input-group date datetimepicker-component">
-            <input class="form-control" id="input-desde" tipo="fecha" {{disabled}}/>
+            <input class="form-control" id="input-desde" tipo="fecha" {{disabled}} />
             <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
+              <span class="glyphicon glyphicon-calendar"></span>
             </span>
           </div>
         </div>
         <div class="col-xs-5">
           <div class="input-group date datetimepicker-component">
-            <input class="form-control" id="input-hasta" tipo="fecha" {{disabled}}/>
+            <input class="form-control" id="input-hasta" tipo="fecha" {{disabled}} />
             <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
+              <span class="glyphicon glyphicon-calendar"></span>
             </span>
           </div>
         </div>
@@ -38,12 +38,59 @@
           <button class="btn btn-primary" id="btn-refrescar"><span class="glyphicon glyphicon-refresh"></span></button>
         </div>
       </div>
+
+      <div class="row marco-filtro">
+        <div class="col-xs-12">          
+          <h4 style="width: 100%; text-align: center;">FILTROS</h4>
+          <div class="filtro">            
+            <div class="form-group">
+              <input type="checkbox" name="resumen" checked><span class="etiquetacheck">Asistentes</span>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" name="pe"><span class="etiquetacheck">% Efectividad</span>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" name="pa"><span class="etiquetacheck">% Asistencia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="tabla-bi">
+        <tr>
+          <th>&nbsp;</th>
+          {{#each tabla.fechas}}
+            <th class="rotate">
+              <div><span>{{truncado fiesta 16}}</span></div>
+            </th>
+          {{/each}}
+        </tr>
+        {{#each tabla.rps}}
+          <tr>
+            <td>{{rp}}</td>
+            {{#each stats}}
+              <td>
+                {{#if filtro.resumen}}
+                  <span style="color: lightslategray">{{resumen}}</span><br />
+                {{/if}}
+                {{#if filtro.pe}}
+                  <span style="color: darkseagreen">{{pe}}</span><br />
+                {{/if}}
+                {{#if filtro.pa}}
+                  <span style="color: mediumvioletred">{{pa}}</span>
+                {{/if}}
+              </td>
+            {{/each}}
+          </tr>
+        {{/each}}
+      </table>
+    </div>
+    <div id="tab-torta" class="tab-pane fade">
       <div class="row">
         <div class="col-xs-12">
           <div id="torta-efectividad"></div>
         </div>
       </div>
     </div>
-
   </div>
+
 </template>

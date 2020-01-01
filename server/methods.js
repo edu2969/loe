@@ -1,13 +1,13 @@
 Meteor.methods({
   LogHT(accion, trackip) {
-    var doc = { 
-      accion: accion, 
-      fecha: new Date()      
+    var doc = {
+      accion: accion,
+      fecha: new Date()
     }
-    if(Meteor.userId()) {
+    if (Meteor.userId()) {
       doc.userId = Meteor.userId();
     }
-    if(trackip) {
+    if (trackip) {
       doc.trackip = this.connection.clientAddress;
     }
     LogComportamientos.insert(doc);
@@ -88,7 +88,7 @@ Meteor.methods({
             };
             if (!messages.danger) messages.danger = [];
             messages.danger.push({
-              item: guest.names + ' baneado ' + ( guest.observacion ? guest.observacion : '(Sin razón descrita)')
+              item: guest.names + ' baneado ' + (guest.observacion ? guest.observacion : '(Sin razón descrita)')
             });
           } else {
             var attender = Attenders.findOne({
@@ -105,7 +105,7 @@ Meteor.methods({
                 messages.warning.push({
                   item: guest.names + ' inscrito por: ' + rp.username
                 });
-              } 
+              }
             } else {
               var rpId = Meteor.userId();
               if (rpId) {
@@ -271,8 +271,7 @@ Meteor.methods({
       Attenders.insert(doc);
     })
   },
-  testDate: function () {
-  },
+  testDate: function () {},
   eliminarEvento: function (eId) {
     var asistentes = Attenders.find({
       eventId: eId
@@ -283,17 +282,23 @@ Meteor.methods({
     Events.remove(eId);
   },
   generarBI: function (eventoId) {
-    var selector = eventoId ? { _id: eventoId } : {};
-    
-    BIRPs.find(eventoId ? { eventId: eventoId } : {}).forEach(function(reg) {
-      BIRPs.remove({ _id: reg._id });
+    var selector = eventoId ? {
+      _id: eventoId
+    } : {};
+
+    BIRPs.find(eventoId ? {
+      eventId: eventoId
+    } : {}).forEach(function (reg) {
+      BIRPs.remove({
+        _id: reg._id
+      });
     });
-    
+
     var evnts = Events.find(selector);
     evnts.forEach(function (evnt) {
       evnt.total = 0;
       evnt.arrives = 0;
-      
+
       var attenders = Attenders.find({
         eventId: evnt._id
       });
@@ -323,26 +328,31 @@ Meteor.methods({
         evnt.total = evnt.total + 1;
         evnt.arrives = evnt.arrives + (a.checktime ? 1 : 0);
       });
-      
-      Events.update({ _id: evnt._id }, {
+
+      Events.update({
+        _id: evnt._id
+      }, {
         $set: {
           total: evnt.total,
           arrives: evnt.arrives
         }
-      });      
+      });
     });
   },
   RegistrarIngreso(rut, baneado) {
-    if(!rut) return false;
+    if (!rut) return false;
     var messages;
-    
+
     var fecha = FechaEventoActual();
     var desde = moment(fecha).startOf('day').toDate();
     var hasta = moment(fecha).add(1, 'd').startOf('day').toDate();
     var evnt = Events.findOne({
-      date: { $gte: desde, $lt: hasta }
+      date: {
+        $gte: desde,
+        $lt: hasta
+      }
     });
-    
+
     var guest = Guests.findOne({
       rut: rut
     });
@@ -354,10 +364,10 @@ Meteor.methods({
       if (!messages.danger) messages.danger = [];
       messages.danger.push({
         item: rut + ' inexistente'
-      });      
+      });
       return messages;
     }
-    
+
     var attender = Attenders.findOne({
       eventId: evnt._id,
       guestId: guest._id
@@ -370,18 +380,26 @@ Meteor.methods({
       if (!messages.danger) messages.danger = [];
       messages.danger.push({
         item: rut + ' no inscrito'
-      });      
+      });
       return messages;
     }
 
-    var invitado = Guests.findOne({ _id: guest._id });
+    var invitado = Guests.findOne({
+      _id: guest._id
+    });
 
-    if(baneado) {    
+    if (baneado) {
       invitado.baneado = true;
-      Guests.update({ _id: guest._id }, { $set: { baneado: true }});
-    } 
+      Guests.update({
+        _id: guest._id
+      }, {
+        $set: {
+          baneado: true
+        }
+      });
+    }
 
-    if(invitado && invitado.baneado) {
+    if (invitado && invitado.baneado) {
       if (!messages) messages = {
         warning: []
       };
@@ -389,7 +407,7 @@ Meteor.methods({
       messages.warning.push({
         item: rut + ' inexistente (O.o)'
       });
-      
+
       return messages;
     }
 
@@ -421,7 +439,9 @@ Meteor.methods({
       success: []
     };
     if (!messages.success) messages.success = []
-    var nombreRP = Meteor.users.findOne({ _id: attender.rpId }).profile.name
+    var nombreRP = Meteor.users.findOne({
+      _id: attender.rpId
+    }).profile.name
     messages.success.push({
       item: 'Bienvenid' + (guest.gender == 'F' ? 'a ' : 'o ') + guest.names + ' (RP: ' + nombreRP + ')'
     });
@@ -431,7 +451,7 @@ Meteor.methods({
     }, {
       $set: {
         "gender": guest.gender,
-        "asistencias": ( guest.asistencias ? guest.asistencias + 1 : 1 )
+        "asistencias": (guest.asistencias ? guest.asistencias + 1 : 1)
       }
     });
     var today = new Date()
@@ -474,7 +494,10 @@ Meteor.methods({
     });
 
     // BI - Incrementa el registro de asistencia
-    var bireg = BIRPs.findOne({ eventoId: event._id, rpId: attender.rpId });
+    var bireg = BIRPs.findOne({
+      eventoId: event._id,
+      rpId: attender.rpId
+    });
     BIRPs.update({
       _id: bireg._id
     }, {
@@ -482,8 +505,125 @@ Meteor.methods({
         asisten: 1
       }
     });
-    
+
     return messages;
+  },
+  ObtenerVistaBI(desde, hasta) {
+    console.log("-------->", desde, hasta);
+    var fechas = [];
+    var rps = [];
+    Events.find({
+      date: {
+        $gte: desde,
+        $lt: hasta
+      }
+    }).forEach(function (e, indice) {
+      console.log("FECHA >> ", moment(e.date).format('DD/MM/YY'));
+      fechas.push({
+        indice: indice,
+        eventoId: e._id,
+        fiesta: e.name,
+        asistentes: e.arrives
+      });
+    });
+    
+    fechas.forEach(function(fecha) {
+      var regs = BIRPs
+        .find({
+          eventoId: fecha.eventoId
+        })
+        .forEach(function (reg) {
+          var indice = 0;          
+          var rp = rps.find(function (rp) {
+            return rp.rpId == reg.rpId;
+          });
+          if (!rp) {
+            rp = {
+              indice: rps.length,
+              rp: reg.rpId ? Meteor.users.findOne({
+                _id: reg.rpId
+              }).profile.name : "???",
+              rpId: reg.rpId,
+              stats: fechas.map(function(f) {
+                return {
+                  resumen: '0 / 0',
+                  pe: '--',
+                  pa: '--'
+                }
+              })
+            }
+            indice = rps.length;
+          } else {            
+            indice = rp.indice;
+          }
+          
+          console.log("Procesando >> ", rp, " { indice: " + indice + "}");
+          
+          rp.stats[fecha.indice].resumen = reg.asisten + " / " + reg.inscritos;
+          rp.stats[fecha.indice].pe = reg.asisten 
+            ? Math.round(reg.asisten / reg.inscritos * 100) + '%' 
+          : '--';
+          rp.stats[fecha.indice].pa = reg.asisten
+            ? Math.round(reg.asisten / fecha.asistentes * 100) + '%' 
+          : '--'; 
+          
+          rps[indice] = rp;            
+        });
+    });
+    //console.log("RPS >>", rps);
+    return {
+      rps: rps.map(function(rp) {
+        delete rp.indice;
+        delete rp.rpId;
+        stats = rp.stats.map(function(stat) {
+          delete stat.indice;
+          delete stat.eventoId;
+          return stat;
+        })
+        return rp;
+      }),
+      fechas: fechas
+    }
+  },
+
+  // Logs
+  GetLogs(pagina) {
+    let porpagina = 50;
+    var PALETA_COLORES = [
+    "#7e3838", "#7e6538", "#7c7e38", "#587e38",
+    "#387e45", "#387e6a", "#386a7e", "#f00",
+    "#0f0", "#00f", "#ff0", "#f0f", "#0ff"];
+    var ips = [];
+    return LogComportamientos.find({}, {
+      sort: {
+        fecha: -1
+      },
+      limit: porpagina,
+      skip: porpagina * pagina
+    }).map(function (log) {
+      // Busca el color segun la IP
+      var indice = ips.indexOf(log.trackip);
+      var color;
+      if (indice != -1) {
+        color = PALETA_COLORES[indice];
+      } else {
+        indice = ips.push(log.trackip);
+        color = PALETA_COLORES[ips.length - 1];
+      }
+      let user = log.userId ? Meteor.users.findOne({
+        _id: log.userId
+      }).profile.name : false;
+      var log = {
+        accion: log.accion,
+        fecha: moment(log.fecha).format("ddd DD/MM/YY HH:mm:ss"),
+        ip: log.trackip,
+        color: color
+      }
+      if (user) {
+        log.rp = user;
+      }
+      return log;
+    });
   }
 });
 

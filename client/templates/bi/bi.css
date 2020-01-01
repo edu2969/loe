@@ -1,10 +1,47 @@
-svg { display: block; }
-.chart-wrapper { border: 2px solid #BDC3C7; border-radius: 8px; margin-top: 10px; text-align: center; }
-.chart-wrapper svg { height: 300px; width: 338px; }
+.filtro {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-.rps-select { background-color: #31b0d5; border-color: #269abc; color: white; }
+.filtro .etiquetacheck {
+  color: antiquewhite;
+  margin-right: 1em;
+  position: relative;
+  top: -0.5em;
+}
 
-#torta-efectividad {
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 15px;
+.tabla-bi td {
+  border: 1px solid #ccc;
+  padding: 4px;
+  background-color: white;
+  color: black;
+}
+.tabla-bi tr th {
+  font-weight: bold;
+  height: 140px;
+  color: ghostwhite;
+}
+th.rotate {
+  height: 140px;
+  white-space: nowrap;
+}
+th.rotate > div {
+  transform: 
+    translate(12px, 47px)
+    rotate(285deg);
+  width: 40px;
+}
+th.rotate > div > span {
+  border-bottom: 1px solid skyblue;
+  padding: 5px 10px;
+}
+.tabla-bi td:not(:first-child) {
+  width: 64px;
+}
+
+.marco-filtro {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: rgba(155, 155, 255, 0.2);
 }

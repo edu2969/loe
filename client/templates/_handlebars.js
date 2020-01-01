@@ -75,3 +75,11 @@ Handlebars.registerHelper("selectedEval", function (idOption, idSelected) {
 Handlebars.registerHelper("currencyFormat", function (valor, decimales) {
   return MaskPrice(valor, decimales)
 })
+
+Handlebars.registerHelper("truncado", function (texto, cantidad) {
+  if(!texto) return "";
+  if(texto.length > cantidad) {
+    return texto.substring(0, cantidad) + "...";
+  }
+  return texto;
+})

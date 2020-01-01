@@ -1,0 +1,14 @@
+section[name="reportelogs"] table {
+  width: 100%;
+  color: white;
+}
+
+section[name="reportelogs"] table tbody {
+  background-color: azure;
+  color: black;
+}
+
+section[name="reportelogs"] td {
+  padding: 2px;
+  border: 2px solid #ddd;
+}
