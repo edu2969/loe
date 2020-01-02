@@ -90,7 +90,7 @@ Template.bi.rendered = function () {
     firstRender = false;
   }
 
-  var fechaDesde = moment().add(-2, 'months').toDate();
+  var fechaDesde = moment().add(-1, 'months').toDate();
   var fechaHasta = new Date();
 
   $('#input-desde').datetimepicker({
